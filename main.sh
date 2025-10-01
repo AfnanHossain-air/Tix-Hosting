@@ -1,11 +1,15 @@
 #!/bin/bash
 
-# Colors for UI
-GREEN="\e[32m"
-RED="\e[31m"
-YELLOW="\e[33m"
-CYAN="\e[36m"
-RESET="\e[0m"
+# ================================
+#  TIX HOSTING - Discord Bot Tool
+# ================================
+
+# Colors for Termux
+GREEN="\033[0;32m"
+RED="\033[0;31m"
+YELLOW="\033[1;33m"
+CYAN="\033[0;36m"
+RESET="\033[0m"
 
 while true; do
     clear
@@ -16,21 +20,21 @@ while true; do
     echo "2) Run an existing Python file"
     echo "3) Install Discord Bot requirements"
     echo "4) Exit"
-    echo -n -e "${YELLOW}Enter choice: ${RESET}"
+    printf "${YELLOW}Enter choice: ${RESET}"
     read choice
 
-    case $choice in
+    case "$choice" in
         1)
-            echo -n "Enter new file name (without .py): "
+            printf "Enter new file name (without .py): "
             read filename
             filepath="${filename}.py"
 
             if [ ! -f "$filepath" ]; then
-                echo -n "Do you want a sample bot template? (y/n): "
+                printf "Do you want a sample bot template? (y/n): "
                 read template_choice
 
-                if [[ "$template_choice" == "y" || "$template_choice" == "Y" ]]; then
-                    cat > "$filepath" <<EOL
+                if [ "$template_choice" = "y" ] || [ "$template_choice" = "Y" ]; then
+                    cat > "$filepath" <<'EOL'
 import discord
 from discord.ext import commands
 
@@ -64,7 +68,7 @@ EOL
             read -p "Press Enter to return to menu..."
             ;;
         2)
-            echo -n "Enter existing file name (without .py): "
+            printf "Enter existing file name (without .py): "
             read filename
             filepath="${filename}.py"
 
